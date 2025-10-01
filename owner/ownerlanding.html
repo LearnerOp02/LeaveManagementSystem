@@ -1041,7 +1041,7 @@
       // Fetch employees list
       async function loadUserInfo() {
         try {
-          const response = await fetch("get_emp_list.php", {
+          const response = await fetch("employee_list.php", {
             credentials: "include",
           });
           if (!response.ok) throw new Error("Network error");
@@ -1089,7 +1089,7 @@
       // Add new employee via backend
       async function addEmployee(formData) {
         try {
-          const response = await fetch("add_emp.php", {
+          const response = await fetch("add_employee.php", {
             method: "POST",
             body: formData,
             credentials: "include",
