@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leave Application | Leave Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary: #6366f1;
+        --primary-dark: #4f46e5;
+        --primary-light: #818cf8;
+        --dark-bg: #0f172a;
+        --dark-surface: #1e293b;
+        --dark-card: #334155;
+        --dark-border: #475569;
+        --text-primary: #f1f5f9;
+        --text-secondary: #cbd5e1;
+        --text-muted: #94a3b8;
+        --success: #10b981;
+        --error: #ef4444;
+        --warning: #f59e0b;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4),
+          0 2px 4px -2px rgba(0, 0, 0, 0.3);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5),
+          0 4px 6px -4px rgba(0, 0, 0, 0.3);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5),
+          0 8px 10px -6px rgba(0, 0, 0, 0.3);
+        --border-radius: 12px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        background: var(--dark-bg);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow-x: hidden;
+        color: var(--text-primary);
+      }
+
+      /* Animated background */
+      .particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .particle {
+        position: absolute;
+        background: rgba(99, 102, 241, 0.15);
+        border-radius: 50%;
+        animation: float 25s infinite linear;
+        opacity: 0;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) translateX(0) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.4;
+        }
+        90% {
+          opacity: 0.2;
+        }
+        100% {
+          transform: translateY(-100vh) translateX(100vw) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      /* Enhanced Navbar styling */
+      .navbar {
+        background: rgba(30, 41, 59, 0.8);
+        backdrop-filter: blur(25px);
+        width: 100%;
+        padding: 1.25rem 3rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: var(--shadow-lg);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        transition: var(--transition);
+      }
+
+      .navbar.scrolled {
+        padding: 0.75rem 3rem;
+        background: rgba(30, 41, 59, 0.95);
+      }
+
+      .navbar-brand {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        text-decoration: none;
+      }
+
+      .navbar-logo {
+        width: 42px;
+        height: 42px;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-primary);
+        font-size: 1.25rem;
+        box-shadow: var(--shadow-md);
+        transition: var(--transition);
+      }
+
+      .navbar:hover .navbar-logo {
+        transform: rotate(15deg);
+      }
+
+      .navbar-title {
+        color: var(--text-primary);
+        font-weight: 700;
+        font-size: 1.5rem;
+        letter-spacing: -0.5px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        position: relative;
+      }
+
+      .nav-button {
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        padding: 0.75rem 1.5rem;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+        font-family: "Inter", sans-serif;
+      }
+
+      .nav-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+        );
+        transition: var(--transition);
+      }
+
+      .nav-button:hover::before {
+        left: 100%;
+      }
+
+      .nav-button::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 3px;
+        background: var(--primary);
+        transition: var(--transition);
+        border-radius: 3px;
+      }
+
+      .nav-button:hover::after {
+        width: 80%;
+      }
+
+      .nav-button.active {
+        color: var(--text-primary);
+        background: rgba(99, 102, 241, 0.2);
+      }
+
+      .nav-button.active::after {
+        width: 80%;
+        background: var(--primary);
+      }
+
+      /* User profile dropdown */
+      .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        position: relative;
+        cursor: pointer;
+      }
+
+      .user-avatar {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-primary);
+        font-size: 1rem;
+        font-weight: 600;
+        transition: var(--transition);
+        box-shadow: var(--shadow-sm);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        font-family: "Inter", sans-serif;
+      }
+
+      .user-avatar:hover {
+        transform: scale(1.1);
+        box-shadow: var(--shadow-md);
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        background: var(--dark-card);
+        backdrop-filter: blur(20px);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-xl);
+        border: 1px solid var(--dark-border);
+        padding: 0.75rem 0;
+        min-width: 200px;
+        z-index: 101;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: var(--transition);
+      }
+
+      .dropdown-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1.5rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: var(--transition);
+      }
+
+      .dropdown-item:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--text-primary);
+      }
+
+      .dropdown-item i {
+        width: 20px;
+        text-align: center;
+        font-size: 1rem;
+      }
+
+      /* Main content container */
+      .content-container {
+        flex: 1;
+        padding: 2rem 3rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .page-header {
+        margin-bottom: 2.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .page-title {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        letter-spacing: -0.025em;
+        position: relative;
+        display: inline-block;
+      }
+
+      .page-title::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: var(--primary);
+        border-radius: 2px;
+        transition: var(--transition);
+      }
+
+      .page-title:hover::after {
+        width: 100%;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+        animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* Leave form and history sections */
+      .leave-form-section,
+      .leave-history-section {
+        background: var(--dark-card);
+        backdrop-filter: blur(20px);
+        border-radius: var(--border-radius);
+        padding: 2.5rem;
+        box-shadow: var(--shadow-xl);
+        border: 1px solid var(--dark-border);
+        transition: var(--transition);
+        height: fit-content;
+      }
+
+      .leave-history-section {
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+
+      .leave-form-section:hover,
+      .leave-history-section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        border-color: var(--primary);
+      }
+
+      .section-header {
+        margin-bottom: 2.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .section-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-primary);
+        font-size: 1.75rem;
+        box-shadow: var(--shadow-lg);
+        position: relative;
+        overflow: hidden;
+        flex-shrink: 0;
+        transition: var(--transition);
+      }
+
+      .section-icon:hover {
+        transform: scale(1.05);
+      }
+
+      .section-icon::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        animation: shine 3s infinite;
+      }
+
+      @keyframes shine {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+
+      .section-header h2 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        letter-spacing: -0.025em;
+        position: relative;
+        padding-bottom: 0.5rem;
+      }
+
+      .section-header h2::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        border-radius: 3px;
+        transition: var(--transition);
+      }
+
+      .section-header h2:hover::after {
+        width: 100%;
+      }
+
+      /* Form styling */
+      .form-group {
+        margin-bottom: 1.75rem;
+      }
+
+      .form-label {
+        display: block;
+        font-size: 0.9375rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        margin-bottom: 0.75rem;
+      }
+
+      .form-input,
+      .form-select,
+      .form-textarea {
+        width: 100%;
+        padding: 1rem 1.25rem;
+        border: 2px solid var(--dark-border);
+        border-radius: var(--border-radius);
+        font-size: 1rem;
+        color: var(--text-primary);
+        background: var(--dark-surface);
+        transition: var(--transition);
+        outline: none;
+        font-family: "Inter", sans-serif;
+      }
+
+      .form-textarea {
+        min-height: 140px;
+        resize: vertical;
+      }
+
+      .form-input:focus,
+      .form-select:focus,
+      .form-textarea:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .form-input:invalid {
+        border-color: var(--error);
+      }
+
+      .form-input::placeholder,
+      .form-textarea::placeholder {
+        color: var(--text-muted);
+      }
+
+      .date-range {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.75rem;
+      }
+
+      /* Button styling */
+      .apply-button {
+        padding: 1rem 2.5rem;
+        border: none;
+        border-radius: var(--border-radius);
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        color: var(--text-primary);
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        margin-top: 1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+        justify-content: center;
+        font-family: "Inter", sans-serif;
+      }
+
+      .apply-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: var(--transition);
+      }
+
+      .apply-button:hover::before {
+        left: 100%;
+      }
+
+      .apply-button:hover {
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark),
+          var(--primary)
+        );
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-3px);
+      }
+
+      .apply-button:active {
+        transform: translateY(0);
+        box-shadow: var(--shadow-md);
+      }
+
+      .apply-button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none !important;
+      }
+
+      .button-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-family: "Inter", sans-serif;
+      }
+
+      .spinner {
+        width: 18px;
+        height: 18px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: var(--text-primary);
+        animation: spin 1s linear infinite;
+        display: none;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Leave list styling */
+      .leave-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .leave-item {
+        background: var(--dark-surface);
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        transition: var(--transition);
+        box-shadow: var(--shadow-sm);
+        border-left: 4px solid var(--primary);
+      }
+
+      .leave-item:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-md);
+        border-left-color: var(--primary-light);
+      }
+
+      .leave-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .leave-title {
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: var(--text-primary);
+      }
+
+      .leave-status {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .status-pending {
+        background: rgba(245, 158, 11, 0.15);
+        color: var(--warning);
+      }
+
+      .status-approved {
+        background: rgba(16, 185, 129, 0.15);
+        color: var(--success);
+      }
+
+      .status-rejected {
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--error);
+      }
+
+      .leave-dates {
+        font-size: 0.9375rem;
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .leave-reason {
+        font-size: 1rem;
+        margin-top: 0.5rem;
+        color: var(--text-primary);
+        line-height: 1.6;
+      }
+
+      .no-leaves {
+        text-align: center;
+        padding: 2.5rem;
+        color: var(--text-muted);
+        font-style: italic;
+        font-size: 1rem;
+      }
+
+      /* Toast notification */
+      .toast {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--dark-card);
+        color: var(--text-primary);
+        padding: 1rem 2rem;
+        border-radius: var(--border-radius);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        box-shadow: var(--shadow-xl);
+        border-left: 4px solid var(--success);
+        animation: fadeIn 0.3s, fadeOut 0.3s 2.7s forwards;
+      }
+
+      .toast-error {
+        border-left: 4px solid var(--error);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+
+      @keyframes fadeOut {
+        to {
+          opacity: 0;
+          transform: translateX(-50%) translateY(20px);
+        }
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 1200px) {
+        .container {
+          grid-template-columns: 1fr;
+          max-width: 800px;
+        }
+
+        .leave-form-section,
+        .leave-history-section {
+          padding: 2rem;
+        }
+
+        .leave-history-section {
+          max-height: none;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 1rem 2rem;
+          width: 100%;
+        }
+
+        .navbar.scrolled {
+          padding: 0.75rem 2rem;
+        }
+
+        .content-container {
+          padding: 1.5rem 2rem;
+        }
+
+        .date-range {
+          grid-template-columns: 1fr;
+        }
+
+        .section-icon {
+          width: 60px;
+          height: 60px;
+          font-size: 1.5rem;
+        }
+
+        .section-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1.25rem;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .navbar {
+          padding: 1rem 1.5rem;
+          flex-direction: column;
+          gap: 1rem;
+          width: 100%;
+        }
+
+        .navbar.scrolled {
+          padding: 0.75rem 1.5rem;
+        }
+
+        .nav-links {
+          gap: 1rem;
+        }
+
+        .nav-button {
+          padding: 0.5rem 1rem;
+          font-size: 0.9rem;
+        }
+
+        .page-title {
+          font-size: 1.75rem;
+        }
+
+        .leave-form-section,
+        .leave-history-section {
+          padding: 1.5rem;
+        }
+
+        .section-header h2 {
+          font-size: 1.5rem;
+        }
+      }
+
+      /* Accessibility improvements */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="particles" id="particles"></div>
+
+    <nav class="navbar" id="navbar">
+      <a href="emplanding.html" class="navbar-brand">
+        <div class="navbar-logo">📅</div>
+        <span class="navbar-title">Leave Manager</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="emplanding.html"
+          ><button class="nav-button">Profile</button></a
+        >
+        <a href="empleave.html"
+          ><button class="nav-button active">Leave</button></a
+        >
+      </div>
+
+      <div class="user-profile" id="userProfile">
+        <div class="user-avatar" id="profileInitials">JD</div>
+        <div class="dropdown-menu" id="userDropdown">
+          <a href="../logout.php" class="dropdown-item">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="content-container">
+      <div class="container">
+        <section class="leave-form-section">
+          <div class="section-header">
+            <div class="section-icon">
+              <i class="fas fa-pen"></i>
+            </div>
+            <h2>Apply for Leave</h2>
+          </div>
+
+          <form id="leaveForm">
+            <div class="form-group">
+              <label for="leaveTitle" class="form-label">Leave Title</label>
+              <input
+                type="text"
+                id="leaveTitle"
+                class="form-input"
+                placeholder="e.g., Vacation, Sick Leave"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="leaveType" class="form-label">Leave Type</label>
+              <select id="leaveType" class="form-select" required>
+                <option value="">Select leave type</option>
+                <option value="vacation">Vacation</option>
+                <option value="sick">Sick Leave</option>
+                <option value="personal">Personal Leave</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="leaveReason" class="form-label">Reason</label>
+              <textarea
+                id="leaveReason"
+                class="form-textarea"
+                placeholder="Brief reason for your leave"
+                required
+              ></textarea>
+            </div>
+
+            <div class="date-range">
+              <div class="form-group">
+                <label for="startDate" class="form-label">Start Date</label>
+                <input type="date" id="startDate" class="form-input" required />
+              </div>
+
+              <div class="form-group">
+                <label for="endDate" class="form-label">End Date</label>
+                <input type="date" id="endDate" class="form-input" required />
+              </div>
+            </div>
+
+            <button type="submit" class="apply-button">
+              <div class="button-content">
+                <span class="spinner" id="spinner"></span>
+                <span>Apply for Leave</span>
+              </div>
+            </button>
+          </form>
+        </section>
+
+        <section class="leave-history-section">
+          <div class="section-header">
+            <div class="section-icon">
+              <i class="fas fa-history"></i>
+            </div>
+            <h2>Your Leave History</h2>
+          </div>
+
+          <div class="leave-list" id="leaveList">
+            <div class="leave-item">
+              <div class="leave-header">
+                <span class="leave-title">Annual Vacation</span>
+                <span class="leave-status status-approved">
+                  <i class="fas fa-check-circle"></i>
+                  Approved
+                </span>
+              </div>
+              <div class="leave-dates">
+                <i class="far fa-calendar-alt"></i>
+                June 15, 2025 - June 20, 2025
+              </div>
+              <div class="leave-reason">Family vacation to the beach</div>
+            </div>
+
+            <div class="leave-item">
+              <div class="leave-header">
+                <span class="leave-title">Medical Leave</span>
+                <span class="leave-status status-pending">
+                  <i class="fas fa-clock"></i>
+                  Pending
+                </span>
+              </div>
+              <div class="leave-dates">
+                <i class="far fa-calendar-alt"></i>
+                July 5, 2025 - July 7, 2025
+              </div>
+              <div class="leave-reason">Doctor's appointment and recovery</div>
+            </div>
+
+            <div class="leave-item">
+              <div class="leave-header">
+                <span class="leave-title">Emergency Leave</span>
+                <span class="leave-status status-rejected">
+                  <i class="fas fa-times-circle"></i>
+                  Rejected
+                </span>
+              </div>
+              <div class="leave-dates">
+                <i class="far fa-calendar-alt"></i>
+                May 10, 2025 - May 12, 2025
+              </div>
+              <div class="leave-reason">
+                Family emergency (insufficient notice)
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script>
+      /* -----------------------------
+   * Background Particles
+   ----------------------------- */
+      function createParticles() {
+        const container = document.getElementById("particles");
+        const count = 20;
+
+        for (let i = 0; i < count; i++) {
+          const particle = document.createElement("div");
+          particle.className = "particle";
+
+          Object.assign(particle.style, {
+            width: `${Math.random() * 25 + 5}px`,
+            height: `${Math.random() * 25 + 5}px`,
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 25}s`,
+            animationDuration: `${Math.random() * 15 + 25}s`,
+          });
+
+          container.appendChild(particle);
+        }
+      }
+
+      /* -----------------------------
+   * User Initials
+   ----------------------------- */
+      function getInitials(name) {
+        if (!name) return "NA";
+        const parts = name.trim().split(" ");
+        return parts.length === 1
+          ? parts[0].substring(0, 2).toUpperCase()
+          : (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+      }
+
+      async function loadUserInitials() {
+        try {
+          const res = await fetch("initails.php", { credentials: "include" });
+          if (!res.ok) throw new Error("Network error");
+          const data = await res.json();
+
+          const initials =
+            data.success && data.name ? getInitials(data.name) : "NA";
+          document.getElementById("profileInitials").textContent = initials;
+        } catch (err) {
+          console.error("Error loading initials:", err);
+          document.getElementById("profileInitials").textContent = "NA";
+        }
+      }
+
+      /* -----------------------------
+   * Leave History
+   ----------------------------- */
+      async function loadLeaveHistory() {
+        try {
+          const res = await fetch("get_leaves.php", { credentials: "include" });
+          if (!res.ok) throw new Error("Network error");
+
+          const data = await res.json();
+          data.success
+            ? renderLeaveList(data.leaves)
+            : showToast(
+                data.message || "Failed to load leave history",
+                "error"
+              );
+        } catch (err) {
+          showToast("Error loading leave history", "error");
+          console.error("Error:", err);
+        }
+      }
+
+      function renderLeaveList(leaves) {
+        const list = document.getElementById("leaveList");
+        if (!leaves.length) {
+          list.innerHTML = `
+        <div class="no-leaves">
+          <i class="far fa-calendar-times fa-2x"></i>
+          <p>No leave applications found</p>
+        </div>`;
+          return;
+        }
+
+        list.innerHTML = leaves
+          .map(
+            (l) => `
+      <div class="leave-item">
+        <div class="leave-header">
+          <span class="leave-title">${l.title}</span>
+          <span class="leave-status status-${l.status}">
+            <i class="fas ${
+              l.status === "approved"
+                ? "fa-check-circle"
+                : l.status === "rejected"
+                ? "fa-times-circle"
+                : "fa-clock"
+            }"></i>
+            ${capitalize(l.status)}
+          </span>
+        </div>
+        <div class="leave-dates">
+          <i class="far fa-calendar-alt"></i>
+          ${formatDate(l.start_date)} - ${formatDate(l.end_date)}
+        </div>
+        <div class="leave-reason">${l.reason}</div>
+      </div>
+    `
+          )
+          .join("");
+      }
+
+      /* -----------------------------
+   * Helpers
+   ----------------------------- */
+      const formatDate = (d) =>
+        new Date(d).toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        });
+
+      const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+      function showToast(msg, type = "success") {
+        document.querySelectorAll(".toast").forEach((t) => t.remove());
+        const toast = document.createElement("div");
+        toast.className = `toast ${type === "error" ? "toast-error" : ""}`;
+        toast.innerHTML =
+          (type === "success"
+            ? '<i class="fas fa-check-circle"></i>'
+            : '<i class="fas fa-exclamation-circle"></i>') +
+          `<span>${msg}</span>`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+      }
+
+      /* -----------------------------
+   * DOM Ready
+   ----------------------------- */
+      document.addEventListener("DOMContentLoaded", async () => {
+        createParticles();
+        await loadUserInitials();
+        await loadLeaveHistory();
+
+        // Navbar scroll effect
+        const navbar = document.getElementById("navbar");
+        window.addEventListener("scroll", () =>
+          navbar.classList.toggle("scrolled", window.scrollY > 10)
+        );
+
+        // Dropdown toggle
+        const userProfile = document.getElementById("userProfile");
+        const userDropdown = document.getElementById("userDropdown");
+        userProfile.addEventListener("click", (e) => {
+          e.stopPropagation();
+          userDropdown.classList.toggle("active");
+        });
+        document.addEventListener("click", (e) => {
+          if (!userProfile.contains(e.target))
+            userDropdown.classList.remove("active");
+        });
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") userDropdown.classList.remove("active");
+        });
+
+        // Nav button active state
+        document.querySelectorAll(".nav-button").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            document
+              .querySelectorAll(".nav-button")
+              .forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+          });
+        });
+
+        // Leave form submit
+        const leaveForm = document.getElementById("leaveForm");
+        const spinner = document.getElementById("spinner");
+        leaveForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const applyBtn = leaveForm.querySelector(".apply-button");
+
+          applyBtn.disabled = true;
+          spinner.style.display = "inline-block";
+
+          const payload = {
+            title: leaveForm.leaveTitle.value,
+            leave_type: leaveForm.leaveType.value,
+            reason: leaveForm.leaveReason.value,
+            start_date: leaveForm.startDate.value,
+            end_date: leaveForm.endDate.value,
+          };
+
+          try {
+            const res = await fetch("apply_leave.php", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+            const result = await res.json();
+
+            if (result.success) {
+              await loadLeaveHistory();
+              leaveForm.reset();
+              showToast("Leave application submitted successfully!");
+            } else {
+              showToast(result.message || "Failed to submit leave", "error");
+            }
+          } catch (err) {
+            showToast("Error submitting leave application", "error");
+            console.error("Error:", err);
+          } finally {
+            applyBtn.disabled = false;
+            spinner.style.display = "none";
+          }
+        });
+
+        // Date pickers
+        const today = new Date().toISOString().split("T")[0];
+        leaveForm.startDate.min = today;
+        leaveForm.endDate.min = today;
+        leaveForm.startDate.addEventListener("change", () => {
+          leaveForm.endDate.min = leaveForm.startDate.value;
+        });
+      });
+    </script>
+  </body>
+</html>
