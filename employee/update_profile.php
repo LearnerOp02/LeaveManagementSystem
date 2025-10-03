@@ -1,77 +1,72 @@
 <?php
-// ==============================
-// Update Profile API
-// ==============================
 session_start();
 include("../config.php");
-
 header('Content-Type: application/json');
 
-// -----------------------------
-// Step 1: Check Authentication
-// -----------------------------
+// Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
-    echo json_encode(['success' => false, 'message' => 'Not authenticated']);
+    echo json_encode(['success' => false, 'message' => 'Please login first']);
     exit();
 }
 
 $user_id = $_SESSION['user_id'];
 $data = json_decode(file_get_contents('php://input'), true);
 
-// -----------------------------
-// Step 2: Validate Input
-// -----------------------------
+// Validate required fields
 if (empty($data['name']) || empty($data['email'])) {
     echo json_encode(['success' => false, 'message' => 'Name and email are required']);
     exit();
 }
 
-// -----------------------------
-// Step 3: Build Dynamic Query
-// -----------------------------
-$query = "UPDATE user_db SET name = ?, email = ?, phone = ?, date_of_birth = ?, gender = ?";
+// Start building the SQL query
+$sql = "UPDATE user_db SET 
+    name = ?, 
+    email = ?, 
+    phone = ?, 
+    date_of_birth = ?, 
+    gender = ?";
+
+// Parameters for the query
 $params = [
     $data['name'],
     $data['email'],
-    $data['phone'],
-    $data['date_of_birth'],
+    $data['phone'] ?? '',
+    $data['date_of_birth'] ?? '',
     $data['gender'] ?? 'male'
 ];
-$types = "sssss";
+$types = "sssss"; // string, string, string, string, string
 
-// Add password update if provided
+// Add password to update if provided
 if (!empty($data['password'])) {
-    $query .= ", password = ?";
+    $sql .= ", password = ?";
     $params[] = password_hash($data['password'], PASSWORD_DEFAULT);
-    $types .= "s";
+    $types .= "s"; // add one more string
 }
 
-$query .= " WHERE id = ?";
+// Complete the query
+$sql .= " WHERE id = ?";
 $params[] = $user_id;
-$types .= "i";
+$types .= "i"; // add integer for user ID
 
-try {
-    // -----------------------------
-    // Step 4: Execute Query
-    // -----------------------------
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param($types, ...$params);
-    $success = $stmt->execute();
+// Execute the update
+$stmt = $conn->prepare($sql);
+$stmt->bind_param($types, ...$params);
 
-    if ($success) {
-        // Update session name if changed
-        if (isset($_SESSION['name']) && $_SESSION['name'] !== $data['name']) {
-            $_SESSION['name'] = $data['name'];
-        }
-        echo json_encode(['success' => true, 'message' => 'Profile updated successfully']);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Failed to update profile']);
-    }
+if ($stmt->execute()) {
+    // Update session with new name if changed
+    $_SESSION['name'] = $data['name'];
 
-    $stmt->close();
-} catch (Exception $e) {
-    echo json_encode(['success' => false, 'message' => 'Database error: ' . $e->getMessage()]);
+    echo json_encode([
+        'success' => true,
+        'message' => 'Profile updated successfully'
+    ]);
+} else {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Failed to update profile'
+    ]);
 }
 
+$stmt->close();
 $conn->close();
 ?>

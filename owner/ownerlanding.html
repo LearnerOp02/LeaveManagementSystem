@@ -20,24 +20,24 @@
         --primary-dark: #4f46e5;
         --primary-light: #818cf8;
         --dark-bg: #0f172a;
-        --dark-surface: #1e293b;
-        --dark-card: #334155;
-        --dark-border: #475569;
+        --dark-surface: rgba(30, 41, 59, 0.4);
+        --dark-card: rgba(51, 65, 85, 0.3);
+        --dark-border: rgba(255, 255, 255, 0.1);
         --text-primary: #f1f5f9;
         --text-secondary: #cbd5e1;
         --text-muted: #94a3b8;
         --success: #10b981;
         --error: #ef4444;
         --warning: #f59e0b;
-        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4),
-          0 2px 4px -2px rgba(0, 0, 0, 0.3);
-        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5),
-          0 4px 6px -4px rgba(0, 0, 0, 0.3);
-        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5),
-          0 8px 10px -6px rgba(0, 0, 0, 0.3);
-        --border-radius: 12px;
-        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.2),
+          0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
+          0 4px 6px -4px rgba(0, 0, 0, 0.2);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4),
+          0 8px 10px -6px rgba(0, 0, 0, 0.2);
+        --border-radius: 16px;
+        --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
       * {
@@ -49,7 +49,7 @@
       body {
         font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
           Roboto, sans-serif;
-        background: var(--dark-bg);
+        background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
         min-height: 100vh;
         display: flex;
         flex-direction: column;
@@ -58,7 +58,48 @@
         color: var(--text-primary);
       }
 
-      /* Animated background */
+      /* Enhanced animated background */
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle at 15% 70%,
+            rgba(99, 102, 241, 0.25) 0%,
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 85% 30%,
+            rgba(129, 140, 248, 0.2) 0%,
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 50% 20%,
+            rgba(79, 70, 229, 0.15) 0%,
+            transparent 40%
+          );
+        z-index: -1;
+        animation: backgroundShift 20s ease-in-out infinite alternate;
+      }
+
+      @keyframes backgroundShift {
+        0% {
+          opacity: 0.7;
+          transform: scale(1) rotate(0deg);
+        }
+        50% {
+          opacity: 0.9;
+        }
+        100% {
+          opacity: 0.7;
+          transform: scale(1.05) rotate(1deg);
+        }
+      }
+
+      /* Enhanced glowing particles */
       .particles {
         position: fixed;
         top: 0;
@@ -71,10 +112,19 @@
 
       .particle {
         position: absolute;
-        background: rgba(99, 102, 241, 0.15);
+        background: rgba(99, 102, 241, 0.4);
         border-radius: 50%;
         animation: float 25s infinite linear;
         opacity: 0;
+        filter: blur(1px);
+      }
+
+      .particle:nth-child(2n) {
+        background: rgba(129, 140, 248, 0.3);
+      }
+
+      .particle:nth-child(3n) {
+        background: rgba(79, 70, 229, 0.3);
       }
 
       @keyframes float {
@@ -83,10 +133,10 @@
           opacity: 0;
         }
         10% {
-          opacity: 0.4;
+          opacity: 0.6;
         }
         90% {
-          opacity: 0.2;
+          opacity: 0.3;
         }
         100% {
           transform: translateY(-100vh) translateX(100vw) rotate(360deg);
@@ -96,15 +146,15 @@
 
       /* Enhanced Navbar styling */
       .navbar {
-        background: rgba(30, 41, 59, 0.8);
-        backdrop-filter: blur(25px);
+        background: rgba(30, 41, 59, 0.6);
+        backdrop-filter: blur(24px) saturate(180%);
         width: 100%;
         padding: 1.25rem 3rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        box-shadow: var(--shadow-lg);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid var(--dark-border);
         position: sticky;
         top: 0;
         z-index: 100;
@@ -113,7 +163,7 @@
 
       .navbar.scrolled {
         padding: 0.75rem 3rem;
-        background: rgba(30, 41, 59, 0.95);
+        background: rgba(30, 41, 59, 0.8);
       }
 
       .navbar-brand {
@@ -137,12 +187,12 @@
         justify-content: center;
         color: var(--text-primary);
         font-size: 1.25rem;
-        box-shadow: var(--shadow-md);
+        box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.2);
         transition: var(--transition);
       }
 
       .navbar:hover .navbar-logo {
-        transform: rotate(15deg);
+        transform: rotate(15deg) scale(1.1);
       }
 
       .navbar-title {
@@ -150,6 +200,7 @@
         font-weight: 700;
         font-size: 1.5rem;
         letter-spacing: -0.5px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       }
 
       .nav-links {
@@ -171,6 +222,7 @@
         position: relative;
         overflow: hidden;
         font-family: "Inter", sans-serif;
+        backdrop-filter: blur(5px);
       }
 
       .nav-button::before {
@@ -213,6 +265,8 @@
       .nav-button.active {
         color: var(--text-primary);
         background: rgba(99, 102, 241, 0.2);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+          0 0 0 1px rgba(255, 255, 255, 0.05);
       }
 
       .nav-button.active::after {
@@ -245,7 +299,7 @@
         font-size: 1rem;
         font-weight: 600;
         transition: var(--transition);
-        box-shadow: var(--shadow-sm);
+        box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         border: 2px solid rgba(255, 255, 255, 0.1);
         font-family: "Inter", sans-serif;
       }
@@ -259,10 +313,10 @@
         position: absolute;
         top: calc(100% + 10px);
         right: 0;
-        background: var(--dark-card);
-        backdrop-filter: blur(20px);
+        background: var(--dark-surface);
+        backdrop-filter: blur(24px) saturate(180%);
         border-radius: var(--border-radius);
-        box-shadow: var(--shadow-xl);
+        box-shadow: var(--shadow-xl), 0 0 0 1px rgba(255, 255, 255, 0.05);
         border: 1px solid var(--dark-border);
         padding: 0.75rem 0;
         min-width: 200px;
@@ -335,20 +389,42 @@
       /* Employee list and add employee sections */
       .employee-list-section,
       .add-employee-section {
-        background: var(--dark-card);
-        backdrop-filter: blur(20px);
-        border-radius: var(--border-radius);
+        background: var(--dark-surface);
+        backdrop-filter: blur(24px) saturate(180%);
+        border-radius: 24px;
         padding: 2.5rem;
-        box-shadow: var(--shadow-xl);
+        box-shadow: var(--shadow-xl), 0 0 0 1px rgba(255, 255, 255, 0.05),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
         border: 1px solid var(--dark-border);
         transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .employee-list-section::before,
+      .add-employee-section::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          to bottom right,
+          rgba(99, 102, 241, 0.1),
+          rgba(129, 140, 248, 0.05),
+          transparent
+        );
+        transform: rotate(-15deg);
+        z-index: -1;
       }
 
       .employee-list-section:hover,
       .add-employee-section:hover {
         transform: translateY(-5px);
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        border-color: var(--primary);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+          0 0 0 1px rgba(255, 255, 255, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.15);
       }
 
       .section-header {
@@ -365,6 +441,7 @@
         letter-spacing: -0.025em;
         position: relative;
         padding-bottom: 0.5rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       }
 
       .section-header h2::after {
@@ -396,8 +473,8 @@
         );
         color: var(--text-primary);
         border: none;
-        padding: 0.75rem 1.5rem;
-        border-radius: var(--border-radius);
+        padding: 0.9rem 1.75rem;
+        border-radius: 14px;
         font-weight: 600;
         cursor: pointer;
         transition: var(--transition);
@@ -406,7 +483,9 @@
         align-items: center;
         gap: 0.5rem;
         font-family: "Inter", sans-serif;
-        box-shadow: var(--shadow-md);
+        box-shadow: var(--shadow-md), 0 0 0 1px rgba(255, 255, 255, 0.05);
+        position: relative;
+        overflow: hidden;
       }
 
       .add-employee-btn:hover {
@@ -415,8 +494,28 @@
           var(--primary-dark),
           var(--primary)
         );
-        box-shadow: var(--shadow-lg);
-        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255, 255, 255, 0.1);
+        transform: translateY(-3px);
+      }
+
+      .add-employee-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transition: var(--transition);
+      }
+
+      .add-employee-btn:hover::before {
+        left: 100%;
       }
 
       /* Employee table styling */
@@ -474,7 +573,7 @@
         color: var(--text-primary);
         font-weight: 600;
         font-size: 1rem;
-        box-shadow: var(--shadow-sm);
+        box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         flex-shrink: 0;
         transition: var(--transition);
         margin-right: 1rem;
@@ -498,21 +597,23 @@
       }
 
       .status-badge {
-        padding: 0.375rem 0.75rem;
+        padding: 0.5rem 0.9rem;
         border-radius: 20px;
         font-size: 0.8125rem;
         font-weight: 600;
         display: inline-block;
         text-transform: capitalize;
+        backdrop-filter: blur(10px);
+        box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.1);
       }
 
       .status-active {
-        background: rgba(16, 185, 129, 0.15);
+        background: rgba(16, 185, 129, 0.2);
         color: var(--success);
       }
 
       .status-inactive {
-        background: rgba(239, 68, 68, 0.15);
+        background: rgba(239, 68, 68, 0.2);
         color: var(--error);
       }
 
@@ -540,22 +641,24 @@
       .form-group select {
         width: 100%;
         padding: 1rem 1.25rem;
-        border: 2px solid var(--dark-border);
-        border-radius: var(--border-radius);
+        border: 1.5px solid var(--dark-border);
+        border-radius: 14px;
         font-size: 1rem;
         color: var(--text-primary);
-        background: var(--dark-surface);
+        background: var(--dark-card);
+        backdrop-filter: blur(10px);
         transition: var(--transition);
         outline: none;
         font-family: "Inter", sans-serif;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
       }
 
       .form-group input:focus,
       .form-group select:focus {
         border-color: var(--primary);
-        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25),
+          inset 0 1px 3px rgba(0, 0, 0, 0.2);
         transform: translateY(-2px);
-        background: var(--dark-card);
       }
 
       .form-group input::placeholder {
@@ -568,7 +671,7 @@
         color: var(--text-primary);
         border: none;
         padding: 1rem 1.5rem;
-        border-radius: var(--border-radius);
+        border-radius: 14px;
         font-weight: 600;
         cursor: pointer;
         transition: var(--transition);
@@ -576,11 +679,14 @@
         width: 100%;
         margin-bottom: 1.5rem;
         font-family: "Inter", sans-serif;
+        backdrop-filter: blur(5px);
+        box-shadow: var(--shadow-sm), 0 0 0 1px rgba(255, 255, 255, 0.05);
       }
 
       .generate-btn:hover {
         background: rgba(255, 255, 255, 0.2);
         transform: translateY(-2px);
+        box-shadow: var(--shadow-md), 0 0 0 1px rgba(255, 255, 255, 0.1);
       }
 
       .submit-btn {
@@ -591,8 +697,8 @@
         );
         color: var(--text-primary);
         border: none;
-        padding: 1rem 2.5rem;
-        border-radius: var(--border-radius);
+        padding: 1.1rem 2.5rem;
+        border-radius: 14px;
         font-weight: 600;
         cursor: pointer;
         transition: var(--transition);
@@ -601,7 +707,9 @@
         align-items: center;
         gap: 0.5rem;
         font-family: "Inter", sans-serif;
-        box-shadow: var(--shadow-md);
+        box-shadow: var(--shadow-md), 0 0 0 1px rgba(255, 255, 255, 0.05);
+        position: relative;
+        overflow: hidden;
       }
 
       .submit-btn:hover:not(:disabled) {
@@ -610,8 +718,8 @@
           var(--primary-dark),
           var(--primary)
         );
-        box-shadow: var(--shadow-lg);
-        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255, 255, 255, 0.1);
+        transform: translateY(-3px);
       }
 
       .submit-btn:disabled {
@@ -620,19 +728,41 @@
         transform: none !important;
       }
 
+      .submit-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transition: var(--transition);
+      }
+
+      .submit-btn:hover:not(:disabled)::before {
+        left: 100%;
+      }
+
       /* Credentials display */
       .credentials-display {
         background: rgba(0, 0, 0, 0.2);
         padding: 1.5rem;
-        border-radius: var(--border-radius);
+        border-radius: 14px;
         margin-top: 1.5rem;
         font-family: monospace;
         border: 1px solid var(--dark-border);
         transition: var(--transition);
+        backdrop-filter: blur(10px);
       }
 
       .credentials-display:hover {
         border-color: var(--primary);
+        transform: translateY(-2px);
       }
 
       .credentials-display div {
@@ -646,7 +776,8 @@
         bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
-        background: var(--dark-card);
+        background: var(--dark-surface);
+        backdrop-filter: blur(24px) saturate(180%);
         color: var(--text-primary);
         padding: 1rem 2rem;
         border-radius: var(--border-radius);
@@ -654,7 +785,7 @@
         display: flex;
         align-items: center;
         gap: 0.75rem;
-        box-shadow: var(--shadow-xl);
+        box-shadow: var(--shadow-xl), 0 0 0 1px rgba(255, 255, 255, 0.05);
         border-left: 4px solid var(--success);
         animation: fadeIn 0.3s, fadeOut 0.3s 2.7s forwards;
       }
@@ -679,6 +810,25 @@
           opacity: 0;
           transform: translateX(-50%) translateY(20px);
         }
+      }
+
+      /* Floating animation for sections */
+      @keyframes floatContainer {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      .employee-list-section,
+      .add-employee-section {
+        animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+          floatContainer 8s ease-in-out infinite;
       }
 
       /* Responsive adjustments */
@@ -773,6 +923,11 @@
           animation-iteration-count: 1 !important;
           transition-duration: 0.01ms !important;
         }
+
+        .employee-list-section,
+        .add-employee-section {
+          animation: none !important;
+        }
       }
     </style>
   </head>
@@ -793,7 +948,7 @@
       </div>
 
       <div class="user-profile" id="userProfile">
-        <div class="user-avatar" id="profileInitials">JD</div>
+        <div class="user-avatar" id="profileInitials">O</div>
         <div class="dropdown-menu" id="userDropdown">
           <a href="../logout.php" class="dropdown-item">
             <i class="fas fa-sign-out-alt"></i>
@@ -1050,11 +1205,6 @@
           if (data.success && data.data) {
             const employees = data.data;
             const userRole = data.user_role;
-
-            if (employees.length > 0) {
-              document.getElementById("profileInitials").textContent =
-                employees[0].initials;
-            }
 
             const employeeTable = document.querySelector(
               ".employee-table tbody"

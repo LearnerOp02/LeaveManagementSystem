@@ -1,49 +1,49 @@
 <?php
-// ==============================
-// Get User Initials API
-// ==============================
 session_start();
 include("../config.php");
-
 header('Content-Type: application/json');
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
-    echo json_encode(['success' => false, 'message' => 'Not authenticated']);
+    echo json_encode(['success' => false, 'message' => 'Please login first']);
     exit();
 }
 
 $user_id = $_SESSION['user_id'];
 
-try {
-    // Fetch user name
-    $stmt = $conn->prepare("SELECT name FROM user_db WHERE id = ?");
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+// Get user's name from database
+$stmt = $conn->prepare("SELECT name FROM user_db WHERE id = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
 
-    if ($result->num_rows === 1) {
-        $user = $result->fetch_assoc();
-        $name = trim($user['name']);
+if ($result->num_rows === 1) {
+    $user = $result->fetch_assoc();
+    $name = trim($user['name']);
 
-        // Generate initials
-        $names = explode(' ', $name);
-        if (count($names) === 1) {
-            $initials = substr($names[0], 0, 2);
-        } else {
-            $initials = $names[0][0] . $names[count($names) - 1][0];
-        }
-        $initials = strtoupper($initials);
+    // Generate initials from name
+    $name_parts = explode(' ', $name);
 
-        echo json_encode(['success' => true, 'name' => $name, 'initials' => $initials]);
+    if (count($name_parts) === 1) {
+        // Single name: take first 2 letters
+        $initials = substr($name_parts[0], 0, 2);
     } else {
-        echo json_encode(['success' => false, 'message' => 'User not found']);
+        // Multiple names: take first letter of first and last name
+        $initials = $name_parts[0][0] . $name_parts[count($name_parts) - 1][0];
     }
 
-    $stmt->close();
-} catch (Exception $e) {
-    echo json_encode(['success' => false, 'message' => 'Database error: ' . $e->getMessage()]);
+    // Convert to uppercase
+    $initials = strtoupper($initials);
+
+    echo json_encode([
+        'success' => true,
+        'name' => $name,
+        'initials' => $initials
+    ]);
+} else {
+    echo json_encode(['success' => false, 'message' => 'User not found']);
 }
 
+$stmt->close();
 $conn->close();
 ?>
