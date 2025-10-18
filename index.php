@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leave Management System - Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --primary-light: #818cf8;
+      --dark-bg: #0f172a;
+      --dark-surface: rgba(30, 41, 59, 0.4);
+      --dark-card: rgba(51, 65, 85, 0.3);
+      --dark-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --error: #ef4444;
+      --success: #10b981;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.2),
+        0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
+        0 4px 6px -4px rgba(0, 0, 0, 0.2);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4),
+        0 8px 10px -6px rgba(0, 0, 0, 0.2);
+      --border-radius: 16px;
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      position: relative;
+      overflow-x: hidden;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    /* Enhanced animated background */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 15% 70%,
+          rgba(99, 102, 241, 0.25) 0%,
+          transparent 40%),
+        radial-gradient(circle at 85% 30%,
+          rgba(129, 140, 248, 0.2) 0%,
+          transparent 40%),
+        radial-gradient(circle at 50% 20%,
+          rgba(79, 70, 229, 0.15) 0%,
+          transparent 40%);
+      z-index: -1;
+      animation: backgroundShift 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes backgroundShift {
+      0% {
+        opacity: 0.7;
+        transform: scale(1) rotate(0deg);
+      }
+
+      50% {
+        opacity: 0.9;
+      }
+
+      100% {
+        opacity: 0.7;
+        transform: scale(1.05) rotate(1deg);
+      }
+    }
+
+    /* Enhanced glowing particles */
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(99, 102, 241, 0.4);
+      border-radius: 50%;
+      animation: float 20s infinite linear;
+      opacity: 0;
+      filter: blur(1px);
+    }
+
+    .particle:nth-child(2n) {
+      background: rgba(129, 140, 248, 0.3);
+    }
+
+    .particle:nth-child(3n) {
+      background: rgba(79, 70, 229, 0.3);
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.6;
+      }
+
+      90% {
+        opacity: 0.3;
+      }
+
+      100% {
+        transform: translateY(-100vh) translateX(100vw) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Enhanced glassmorphic container */
+    .login-container {
+      background: var(--dark-surface);
+      backdrop-filter: blur(24px) saturate(180%);
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: var(--shadow-xl), 0 0 0 1px rgba(255, 255, 255, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--dark-border);
+      position: relative;
+      animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .login-container:hover {
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      transform: translateY(-5px);
+    }
+
+    .login-container::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(to bottom right,
+          rgba(99, 102, 241, 0.15),
+          rgba(129, 140, 248, 0.08),
+          transparent);
+      transform: rotate(-15deg);
+      z-index: -1;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .logo-container {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg,
+          var(--primary),
+          var(--primary-light));
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      color: var(--text-primary);
+      box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .logo:hover {
+      transform: rotate(5deg) scale(1.05);
+      box-shadow: 0 15px 30px -5px rgba(99, 102, 241, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .logo::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% {
+        left: -100%;
+      }
+
+      100% {
+        left: 100%;
+      }
+    }
+
+    .brand-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.025em;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .brand-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      font-weight: 400;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      border: 1.5px solid var(--dark-border);
+      border-radius: 14px;
+      font-size: 1rem;
+      color: var(--text-primary);
+      background: var(--dark-card);
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+      outline: none;
+      font-family: "Inter", sans-serif;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25),
+        inset 0 1px 3px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .form-input:invalid {
+      border-color: var(--error);
+    }
+
+    .form-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .password-group {
+      position: relative;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0.25rem;
+      border-radius: 8px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(5px);
+      touch-action: manipulation;
+    }
+
+    .toggle-password:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .button-content {
+      margin-top: 20px;
+    }
+
+    .login-button {
+      width: 100%;
+      padding: 1.1rem;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg,
+          var(--primary),
+          var(--primary-light));
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-md), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      font-family: "Inter", sans-serif;
+      letter-spacing: 0.5px;
+      touch-action: manipulation;
+    }
+
+    .login-button:hover {
+      background: linear-gradient(135deg,
+          var(--primary-dark),
+          var(--primary));
+      box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .login-button:active {
+      transform: translateY(0);
+    }
+
+    .login-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent);
+      transition: var(--transition);
+    }
+
+    .login-button:hover::before {
+      left: 100%;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Floating animation for the entire container */
+    @keyframes floatContainer {
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    .login-container {
+      animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+        floatContainer 8s ease-in-out infinite;
+    }
+
+    /* Responsive design */
+    /* Large screens (1200px and up) */
+    @media (min-width: 1200px) {
+      .login-container {
+        max-width: 480px;
+        padding: 3.5rem 3rem;
+      }
+
+      .brand-title {
+        font-size: 2.5rem;
+      }
+
+      .logo {
+        width: 90px;
+        height: 90px;
+        font-size: 2.5rem;
+      }
+    }
+
+    /* Tablets and small desktops (768px to 1199px) */
+    @media (max-width: 1199px) and (min-width: 768px) {
+      .login-container {
+        max-width: 420px;
+        padding: 3rem 2.5rem;
+      }
+
+      .brand-title {
+        font-size: 2.2rem;
+      }
+
+      .logo {
+        width: 80px;
+        height: 80px;
+        font-size: 2.2rem;
+      }
+    }
+
+    /* Mobile devices (480px to 767px) */
+    @media (max-width: 767px) and (min-width: 481px) {
+      .login-container {
+        padding: 2.5rem 2rem;
+        margin: 1rem;
+        border-radius: 20px;
+        max-width: 400px;
+      }
+
+      .brand-title {
+        font-size: 2rem;
+      }
+
+      .logo {
+        width: 75px;
+        height: 75px;
+        font-size: 2rem;
+      }
+
+      .brand-subtitle {
+        font-size: 1rem;
+      }
+
+      .form-input {
+        padding: 0.9rem 1.1rem;
+      }
+
+      .login-button {
+        padding: 1rem;
+      }
+    }
+
+    /* Small mobile devices (480px and below) */
+    @media (max-width: 480px) {
+      html {
+        font-size: 14px;
+      }
+
+      body {
+        padding: 0.5rem;
+      }
+
+      .login-container {
+        padding: 2rem 1.5rem;
+        margin: 0.5rem;
+        border-radius: 18px;
+        max-width: 100%;
+      }
+
+      .brand-title {
+        font-size: 1.8rem;
+      }
+
+      .logo {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+        border-radius: 20px;
+      }
+
+      .brand-subtitle {
+        font-size: 0.95rem;
+      }
+
+      .form-input {
+        padding: 0.85rem 1rem;
+        font-size: 0.95rem;
+      }
+
+      .login-button {
+        padding: 0.95rem;
+        font-size: 1rem;
+      }
+
+      .toggle-password {
+        right: 0.75rem;
+        padding: 0.2rem;
+      }
+
+      .login-form {
+        gap: 1.25rem;
+      }
+
+      .login-header {
+        margin-bottom: 2rem;
+      }
+    }
+
+    /* Very small screens (320px and below) */
+    @media (max-width: 320px) {
+      html {
+        font-size: 13px;
+      }
+
+      .login-container {
+        padding: 1.5rem 1.25rem;
+      }
+
+      .brand-title {
+        font-size: 1.6rem;
+      }
+
+      .logo {
+        width: 60px;
+        height: 60px;
+        font-size: 1.6rem;
+        border-radius: 16px;
+      }
+
+      .form-input {
+        padding: 0.75rem 0.9rem;
+      }
+
+      .login-button {
+        padding: 0.85rem;
+      }
+    }
+
+    /* Landscape orientation for mobile */
+    @media (max-height: 500px) and (orientation: landscape) {
+      body {
+        padding: 0.5rem;
+        align-items: flex-start;
+      }
+
+      .login-container {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        padding: 1.5rem 2rem;
+      }
+
+      .login-header {
+        margin-bottom: 1.5rem;
+      }
+
+      .logo {
+        width: 60px;
+        height: 60px;
+        font-size: 1.6rem;
+      }
+
+      .login-form {
+        gap: 1rem;
+      }
+    }
+
+    /* High DPI screens */
+    @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      .login-container {
+        backdrop-filter: blur(30px) saturate(200%);
+      }
+    }
+
+    /* Accessibility improvements */
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .login-container {
+        animation: none !important;
+      }
+
+      .logo::before {
+        animation: none !important;
+      }
+
+      .particle {
+        animation: none !important;
+        opacity: 0.3;
+      }
+    }
+
+    /* Focus styles for better accessibility */
+    .form-input:focus-visible,
+    .toggle-password:focus-visible,
+    .login-button:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    /* Improve touch targets for mobile */
+    @media (pointer: coarse) {
+
+      .form-input,
+      .login-button,
+      .toggle-password {
+        min-height: 44px;
+      }
+
+      .toggle-password {
+        min-width: 44px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="particles" id="particles"></div>
+
+  <main class="login-container" role="main">
+    <div class="login-header">
+      <div class="logo-container">
+        <div class="logo" aria-hidden="true">📅</div>
+      </div>
+      <h1 class="brand-title">Leave Manager</h1>
+      <p class="brand-subtitle">Welcome back to your employee portal</p>
+    </div>
+
+    <form class="login-form" id="loginForm" action="login.php" method="POST" novalidate>
+      <div class="form-group">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" id="username" class="form-input" placeholder="Enter your username or employee ID" required
+          autocomplete="username" aria-describedby="username-help" name="email" />
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <div class="password-group">
+          <input name="password" type="password" id="password" class="form-input" placeholder="Enter your password"
+            required autocomplete="current-password" aria-describedby="password-help" />
+          <button type="button" class="toggle-password" aria-label="Show password" data-visible="false">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path class="eye-open" d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor"
+                stroke-width="2" fill="none" />
+              <circle class="eye-open" cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" fill="none" />
+              <path class="eye-closed hidden"
+                d="m1 1 22 22M6.71 6.71a10 10 0 0 0-4.71 5.29 10 10 0 0 0 4.71 5.29m2.58-2.58A3 3 0 0 0 12 15a3 3 0 0 0 2.71-1.71m2.58-2.58a10 10 0 0 0 4.71-5.29 10 10 0 0 0-4.71-5.29"
+                stroke="currentColor" stroke-width="2" fill="none" />
+            </svg>
+          </button>
+        </div>
+        <div class="button-content"></div>
+        <button type="submit" class="login-button" id="loginButton">
+          <span>Sign In</span>
+        </button>
+      </div>
+    </form>
+  </main>
+  <script>
+    // Create background particles
+    function createParticles() {
+      const container = document.getElementById("particles");
+      const count = window.innerWidth < 768 ? 15 : 20;
+
+      for (let i = 0; i < count; i++) {
+        const particle = document.createElement("div");
+        particle.className = "particle";
+
+        // Random properties
+        const size = Math.random() * 25 + 5;
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        const delay = Math.random() * 20;
+        const duration = Math.random() * 10 + 20;
+
+        Object.assign(particle.style, {
+          width: `${size}px`,
+          height: `${size}px`,
+          left: `${posX}%`,
+          top: `${posY}%`,
+          animationDelay: `${delay}s`,
+          animationDuration: `${duration}s`,
+        });
+
+        container.appendChild(particle);
+      }
+    }
+
+    // Toggle password visibility
+    function initPasswordToggle() {
+      const toggleBtn = document.querySelector(".toggle-password");
+      const passwordInput = document.getElementById("password");
+
+      toggleBtn.addEventListener("click", () => {
+        const isVisible = passwordInput.type === "text";
+        passwordInput.type = isVisible ? "password" : "text";
+
+        toggleBtn.setAttribute(
+          "aria-label",
+          isVisible ? "Show password" : "Hide password"
+        );
+        toggleBtn.dataset.visible = (!isVisible).toString();
+
+        document
+          .querySelectorAll(".eye-open, .eye-closed")
+          .forEach((el) => el.classList.toggle("hidden"));
+
+        passwordInput.focus();
+      });
+    }
+
+    // Add subtle hover effects to form inputs
+    function enhanceFormInteractions() {
+      const inputs = document.querySelectorAll(".form-input");
+
+      inputs.forEach((input) => {
+        input.addEventListener("mouseenter", () => {
+          input.style.transform = "translateY(-2px)";
+        });
+
+        input.addEventListener("mouseleave", () => {
+          if (document.activeElement !== input) {
+            input.style.transform = "translateY(0)";
+          }
+        });
+      });
+    }
+
+    // Handle responsive adjustments
+    function handleResponsiveAdjustments() {
+      // Adjust font size for very small screens
+      if (window.innerWidth <= 320) {
+        document.documentElement.style.fontSize = '13px';
+      } else if (window.innerWidth <= 480) {
+        document.documentElement.style.fontSize = '14px';
+      } else {
+        document.documentElement.style.fontSize = '16px';
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      createParticles();
+      initPasswordToggle();
+      enhanceFormInteractions();
+      handleResponsiveAdjustments();
+
+      // Update on window resize
+      window.addEventListener('resize', handleResponsiveAdjustments);
+    });
+  </script>
+</body>
+
+</html>

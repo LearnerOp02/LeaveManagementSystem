@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Employee Profile | Leave Manager</title>
+    <title>Leave Approvals | Leave Manager</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -66,7 +66,8 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: radial-gradient(
+        background: 
+          radial-gradient(
             circle at 15% 70%,
             rgba(99, 102, 241, 0.25) 0%,
             transparent 40%
@@ -148,12 +149,14 @@
       .navbar {
         background: rgba(30, 41, 59, 0.6);
         backdrop-filter: blur(24px) saturate(180%);
+        width: 100%;
         padding: 1.25rem 3rem;
         display: flex;
         justify-content: space-between;
-        width: 100%;
         align-items: center;
-        box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255, 255, 255, 0.05);
+        box-shadow: 
+          var(--shadow-lg),
+          0 0 0 1px rgba(255, 255, 255, 0.05);
         border-bottom: 1px solid var(--dark-border);
         position: sticky;
         top: 0;
@@ -187,7 +190,9 @@
         justify-content: center;
         color: var(--text-primary);
         font-size: 1.25rem;
-        box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        box-shadow: 
+          var(--shadow-md),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
         transition: var(--transition);
       }
 
@@ -265,7 +270,8 @@
       .nav-button.active {
         color: var(--text-primary);
         background: rgba(99, 102, 241, 0.2);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        box-shadow: 
+          inset 0 1px 0 rgba(255, 255, 255, 0.1),
           0 0 0 1px rgba(255, 255, 255, 0.05);
       }
 
@@ -299,8 +305,11 @@
         font-size: 1rem;
         font-weight: 600;
         transition: var(--transition);
-        box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        box-shadow: 
+          var(--shadow-sm),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
         border: 2px solid rgba(255, 255, 255, 0.1);
+        font-family: "Inter", sans-serif;
       }
 
       .user-avatar:hover {
@@ -315,7 +324,9 @@
         background: var(--dark-surface);
         backdrop-filter: blur(24px) saturate(180%);
         border-radius: var(--border-radius);
-        box-shadow: var(--shadow-xl), 0 0 0 1px rgba(255, 255, 255, 0.05);
+        box-shadow: 
+          var(--shadow-xl),
+          0 0 0 1px rgba(255, 255, 255, 0.05);
         border: 1px solid var(--dark-border);
         padding: 0.75rem 0;
         min-width: 200px;
@@ -363,45 +374,13 @@
         flex-direction: column;
       }
 
-      .page-header {
-        margin-bottom: 2.5rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .page-title {
-        font-size: 2rem;
-        font-weight: 800;
-        color: var(--text-primary);
-        letter-spacing: -0.025em;
-        position: relative;
-        display: inline-block;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      }
-
-      .page-title::after {
-        content: "";
-        position: absolute;
-        bottom: -8px;
-        left: 0;
-        width: 60px;
-        height: 4px;
-        background: var(--primary);
-        border-radius: 2px;
-        transition: var(--transition);
-      }
-
-      .page-title:hover::after {
-        width: 100%;
-      }
-
       .container {
-        max-width: 1400px;
+        max-width: 1200px;
         margin: 0 auto;
         width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
         gap: 2.5rem;
         animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
       }
@@ -417,24 +396,23 @@
         }
       }
 
-      /* Profile and bank sections */
-      .profile-section,
-      .bank-section {
+      /* Leave list section */
+      .leave-list-section {
         background: var(--dark-surface);
         backdrop-filter: blur(24px) saturate(180%);
         border-radius: 24px;
         padding: 2.5rem;
-        box-shadow: var(--shadow-xl), 0 0 0 1px rgba(255, 255, 255, 0.05),
+        box-shadow: 
+          var(--shadow-xl),
+          0 0 0 1px rgba(255, 255, 255, 0.05),
           inset 0 1px 0 rgba(255, 255, 255, 0.1);
         border: 1px solid var(--dark-border);
         transition: var(--transition);
-        height: fit-content;
         position: relative;
         overflow: hidden;
       }
 
-      .profile-section::before,
-      .bank-section::before {
+      .leave-list-section::before {
         content: "";
         position: absolute;
         top: -50%;
@@ -451,10 +429,10 @@
         z-index: -1;
       }
 
-      .profile-section:hover,
-      .bank-section:hover {
+      .leave-list-section:hover {
         transform: translateY(-5px);
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        box-shadow: 
+          0 25px 50px -12px rgba(0, 0, 0, 0.5),
           0 0 0 1px rgba(255, 255, 255, 0.1),
           inset 0 1px 0 rgba(255, 255, 255, 0.15);
       }
@@ -466,9 +444,9 @@
         gap: 1.5rem;
       }
 
-      .profile-pic {
-        width: 100px;
-        height: 100px;
+      .section-icon {
+        width: 80px;
+        height: 80px;
         background: linear-gradient(
           135deg,
           var(--primary),
@@ -479,20 +457,21 @@
         align-items: center;
         justify-content: center;
         color: var(--text-primary);
-        font-size: 2.25rem;
-        font-weight: 600;
-        box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        font-size: 1.75rem;
+        box-shadow: 
+          var(--shadow-lg),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
         position: relative;
         overflow: hidden;
         flex-shrink: 0;
         transition: var(--transition);
       }
 
-      .profile-pic:hover {
+      .section-icon:hover {
         transform: scale(1.05);
       }
 
-      .profile-pic::before {
+      .section-icon::before {
         content: "";
         position: absolute;
         top: 0;
@@ -547,83 +526,208 @@
         width: 100%;
       }
 
-      /* Form styling */
-      .form-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.75rem;
+      /* Leave list styling */
+      .leave-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
       }
 
-      .form-group {
-        margin-bottom: 1.5rem;
-      }
-
-      .form-label {
-        display: block;
-        font-size: 0.9375rem;
-        font-weight: 500;
-        color: var(--text-secondary);
-        margin-bottom: 0.75rem;
-      }
-
-      .form-input,
-      .form-select {
-        width: 100%;
-        padding: 1rem 1.25rem;
-        border: 1.5px solid var(--dark-border);
-        border-radius: 14px;
-        font-size: 1rem;
-        color: var(--text-primary);
-        background: var(--dark-card);
-        backdrop-filter: blur(10px);
+      .leave-item {
+        background: var(--dark-surface);
+        backdrop-filter: blur(20px) saturate(180%);
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
         transition: var(--transition);
-        outline: none;
-        font-family: "Inter", sans-serif;
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        box-shadow: 
+          var(--shadow-sm),
+          0 0 0 1px rgba(255, 255, 255, 0.05);
+        border-left: 4px solid var(--primary);
+        position: relative;
+        overflow: hidden;
       }
 
-      .form-input:focus,
-      .form-select:focus {
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25),
-          inset 0 1px 3px rgba(0, 0, 0, 0.2);
-        transform: translateY(-2px);
+      .leave-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 
+          var(--shadow-md),
+          0 0 0 1px rgba(255, 255, 255, 0.1);
+        border-left-color: var(--primary-light);
       }
 
-      .form-input:invalid {
-        border-color: var(--error);
+      .leave-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
 
-      .form-input::placeholder {
-        color: var(--text-muted);
+      .employee-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
       }
 
-      /* Button styling */
-      .save-button {
-        padding: 1.1rem 2.5rem;
-        border: none;
-        border-radius: 14px;
+      .employee-avatar {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
         background: linear-gradient(
           135deg,
           var(--primary),
           var(--primary-light)
         );
+        display: flex;
+        align-items: center;
+        justify-content: center;
         color: var(--text-primary);
         font-weight: 600;
         font-size: 1rem;
-        cursor: pointer;
+        box-shadow: 
+          var(--shadow-sm),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        flex-shrink: 0;
         transition: var(--transition);
-        position: relative;
-        overflow: hidden;
-        box-shadow: var(--shadow-md), 0 0 0 1px rgba(255, 255, 255, 0.05);
-        margin-top: 1rem;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.75rem;
-        font-family: "Inter", sans-serif;
       }
 
-      .save-button::before {
+      .employee-avatar:hover {
+        transform: scale(1.1);
+      }
+
+      .employee-details {
+        line-height: 1.4;
+      }
+
+      .employee-name {
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .employee-email {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+      }
+
+      .leave-status {
+        padding: 0.6rem 1.2rem;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        backdrop-filter: blur(10px);
+        box-shadow: 
+          var(--shadow-sm),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      }
+
+      .status-pending {
+        background: rgba(245, 158, 11, 0.2);
+        color: var(--warning);
+      }
+
+      .status-approved {
+        background: rgba(16, 185, 129, 0.2);
+        color: var(--success);
+      }
+
+      .status-rejected {
+        background: rgba(239, 68, 68, 0.2);
+        color: var(--error);
+      }
+
+      .leave-details {
+        margin-top: 0.75rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--dark-border);
+      }
+
+      .leave-title {
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+      }
+
+      .leave-dates {
+        font-size: 0.9375rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .leave-reason {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: var(--text-primary);
+        background: rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        border-radius: var(--border-radius);
+        margin-top: 0.75rem;
+        backdrop-filter: blur(5px);
+      }
+
+      .leave-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.25rem;
+        justify-content: flex-end;
+      }
+
+      .approve-btn,
+      .reject-btn {
+        padding: 0.9rem 1.75rem;
+        border-radius: 14px;
+        font-weight: 600;
+        font-size: 0.9375rem;
+        cursor: pointer;
+        transition: var(--transition);
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: "Inter", sans-serif;
+        backdrop-filter: blur(5px);
+        box-shadow: 
+          var(--shadow-sm),
+          0 0 0 1px rgba(255, 255, 255, 0.05);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .approve-btn {
+        background: rgba(16, 185, 129, 0.2);
+        color: var(--success);
+      }
+
+      .approve-btn:hover {
+        background: rgba(16, 185, 129, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 
+          var(--shadow-md),
+          0 0 0 1px rgba(255, 255, 255, 0.1);
+      }
+
+      .reject-btn {
+        background: rgba(239, 68, 68, 0.2);
+        color: var(--error);
+      }
+
+      .reject-btn:hover {
+        background: rgba(239, 68, 68, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 
+          var(--shadow-md),
+          0 0 0 1px rgba(255, 255, 255, 0.1);
+      }
+
+      .approve-btn::before,
+      .reject-btn::before {
         content: "";
         position: absolute;
         top: 0;
@@ -633,58 +737,23 @@
         background: linear-gradient(
           90deg,
           transparent,
-          rgba(255, 255, 255, 0.3),
+          rgba(255, 255, 255, 0.2),
           transparent
         );
         transition: var(--transition);
       }
 
-      .save-button:hover::before {
+      .approve-btn:hover::before,
+      .reject-btn:hover::before {
         left: 100%;
       }
 
-      .save-button:hover {
-        background: linear-gradient(
-          135deg,
-          var(--primary-dark),
-          var(--primary)
-        );
-        box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255, 255, 255, 0.1);
-        transform: translateY(-3px);
-      }
-
-      .save-button:active {
-        transform: translateY(0);
-        box-shadow: var(--shadow-md);
-      }
-
-      .save-button:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-        transform: none !important;
-      }
-
-      .button-content {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-      }
-
-      .spinner {
-        width: 18px;
-        height: 18px;
-        border: 3px solid rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
-        border-top-color: var(--text-primary);
-        animation: spin 1s linear infinite;
-        display: none;
-      }
-
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
+      .no-leaves {
+        text-align: center;
+        padding: 3rem;
+        color: var(--text-muted);
+        font-style: italic;
+        font-size: 1.1rem;
       }
 
       /* Toast notification */
@@ -702,7 +771,9 @@
         display: flex;
         align-items: center;
         gap: 0.75rem;
-        box-shadow: var(--shadow-xl), 0 0 0 1px rgba(255, 255, 255, 0.05);
+        box-shadow: 
+          var(--shadow-xl),
+          0 0 0 1px rgba(255, 255, 255, 0.05);
         border-left: 4px solid var(--success);
         animation: fadeIn 0.3s, fadeOut 0.3s 2.7s forwards;
       }
@@ -742,29 +813,22 @@
         }
       }
 
-      .profile-section,
-      .bank-section {
-        animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+      .leave-list-section {
+        animation: 
+          slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
           floatContainer 8s ease-in-out infinite;
       }
 
       /* Responsive adjustments */
       @media (max-width: 1200px) {
         .container {
-          grid-template-columns: 1fr;
           max-width: 800px;
-        }
-
-        .profile-section,
-        .bank-section {
-          padding: 2rem;
         }
       }
 
       @media (max-width: 768px) {
         .navbar {
           padding: 1rem 2rem;
-          width: 100%;
         }
 
         .navbar.scrolled {
@@ -775,27 +839,32 @@
           padding: 1.5rem 2rem;
         }
 
-        .form-grid {
-          grid-template-columns: 1fr;
+        .section-icon {
+          width: 60px;
+          height: 60px;
+          font-size: 1.5rem;
         }
 
-        .profile-pic {
-          width: 80px;
-          height: 80px;
-          font-size: 1.75rem;
-        }
-
-        .section-header {
+        .leave-header {
           flex-direction: column;
           align-items: flex-start;
-          gap: 1.25rem;
+          gap: 1rem;
+        }
+
+        .leave-actions {
+          justify-content: flex-start;
+          width: 100%;
+        }
+
+        .approve-btn,
+        .reject-btn {
+          flex: 1;
         }
       }
 
       @media (max-width: 576px) {
         .navbar {
           padding: 1rem 1.5rem;
-          width: 100%;
           flex-direction: column;
           gap: 1rem;
         }
@@ -804,26 +873,27 @@
           padding: 0.75rem 1.5rem;
         }
 
-        .nav-links {
-          gap: 1rem;
-        }
-
         .nav-button {
           padding: 0.5rem 1rem;
           font-size: 0.9rem;
         }
 
-        .page-title {
-          font-size: 1.75rem;
-        }
-
-        .profile-section,
-        .bank-section {
+        .leave-list-section {
           padding: 1.5rem;
         }
 
         .section-header h2 {
           font-size: 1.5rem;
+        }
+
+        .employee-info {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.75rem;
+        }
+
+        .leave-actions {
+          flex-direction: column;
         }
       }
 
@@ -836,33 +906,31 @@
           animation-iteration-count: 1 !important;
           transition-duration: 0.01ms !important;
         }
-
-        .profile-section,
-        .bank-section {
+        
+        .leave-list-section {
           animation: none !important;
         }
       }
     </style>
   </head>
-
   <body>
     <div class="particles" id="particles"></div>
 
     <nav class="navbar" id="navbar">
-      <a href="emplanding.html" class="navbar-brand">
+      <a href="ownerlanding.html" class="navbar-brand">
         <div class="navbar-logo">📅</div>
         <span class="navbar-title">Leave Manager</span>
       </a>
 
       <div class="nav-links">
-        <a href="emplanding.html"
-          ><button class="nav-button active">Profile</button></a
+        <a href="ownerlanding.php"><button class="nav-button">List</button></a>
+        <a href="ownerleave.php"
+          ><button class="nav-button active">Leave</button></a
         >
-        <a href="empleave.html"><button class="nav-button">Leave</button></a>
       </div>
 
       <div class="user-profile" id="userProfile">
-        <div class="user-avatar" id="profileInitials">JD</div>
+        <div class="user-avatar" id="profileInitials">O</div>
         <div class="dropdown-menu" id="userDropdown">
           <a href="../logout.php" class="dropdown-item">
             <i class="fas fa-sign-out-alt"></i>
@@ -874,354 +942,307 @@
 
     <div class="content-container">
       <div class="container">
-        <section class="profile-section">
+        <section class="leave-list-section">
           <div class="section-header">
-            <div class="profile-pic" id="profilePic">👤</div>
-            <h2>Personal Information</h2>
+            <div class="section-icon">
+              <i class="fas fa-clipboard-list"></i>
+            </div>
+            <h2>Leave Requests</h2>
           </div>
 
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="fullName" class="form-label">Full Name</label>
-              <input
-                type="text"
-                id="fullName"
-                class="form-input"
-                placeholder="John Doe"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="email" class="form-label">Email</label>
-              <input
-                type="email"
-                id="email"
-                class="form-input"
-                placeholder="john.doe@example.com"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="password" class="form-label">Password</label>
-              <input
-                type="password"
-                id="password"
-                class="form-input"
-                placeholder="Leave blank to keep current"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="phone" class="form-label">Phone Number</label>
-              <input
-                type="tel"
-                id="phone"
-                class="form-input"
-                placeholder="+1 (555) 123-4567"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="dob" class="form-label">Date of Birth</label>
-              <input type="date" id="dob" class="form-input" />
-            </div>
-
-            <div class="form-group">
-              <label for="gender" class="form-label">Gender</label>
-              <select id="gender" class="form-select">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-          </div>
-
-          <button class="save-button" id="saveProfile">
-            <span class="spinner" id="profileSpinner"></span>
-            Save Changes
-          </button>
-        </section>
-
-        <section class="bank-section">
-          <div class="section-header">
-            <h2>Bank Details</h2>
-          </div>
-
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="accountName" class="form-label"
-                >Account Holder Name</label
-              >
-              <input
-                type="text"
-                id="accountName"
-                class="form-input"
-                placeholder="John Doe"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="accountNumber" class="form-label"
-                >Account Number</label
-              >
-              <input
-                type="text"
-                id="accountNumber"
-                class="form-input"
-                placeholder="1234567890"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="ifsc" class="form-label">IFSC Code</label>
-              <input
-                type="text"
-                id="ifsc"
-                class="form-input"
-                placeholder="ABCD0123456"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="bankName" class="form-label">Bank Name</label>
-              <input
-                type="text"
-                id="bankName"
-                class="form-input"
-                placeholder="Example Bank"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="branch" class="form-label">Branch Name</label>
-              <input
-                type="text"
-                id="branch"
-                class="form-input"
-                placeholder="Main Branch"
-              />
-            </div>
-          </div>
-
-          <button class="save-button" id="saveBank">
-            <span class="spinner" id="bankSpinner"></span>
-            Update Bank Details
-          </button>
-        </section>
-      </div>
+          <div class="leave-list" id="leaveList">
     </div>
-
     <script>
-      /** ---------------------------
-   * Background Particles
-   ---------------------------- */
+      // Create animated background particles
       function createParticles() {
-        const container = document.getElementById("particles");
-        const count = 20;
+        const particlesContainer = document.getElementById("particles");
+        const particleCount = 20;
 
-        for (let i = 0; i < count; i++) {
+        for (let i = 0; i < particleCount; i++) {
           const particle = document.createElement("div");
-          particle.className = "particle";
+          particle.classList.add("particle");
 
-          // Random styles
-          Object.assign(particle.style, {
-            width: `${Math.random() * 25 + 5}px`,
-            height: `${Math.random() * 25 + 5}px`,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 25}s`,
-            animationDuration: `${Math.random() * 15 + 25}s`,
-          });
+          // Random properties
+          const size = Math.random() * 25 + 5;
+          const posX = Math.random() * 100;
+          const posY = Math.random() * 100;
+          const delay = Math.random() * 25;
+          const duration = Math.random() * 15 + 25;
 
-          container.appendChild(particle);
+          particle.style.width = `${size}px`;
+          particle.style.height = `${size}px`;
+          particle.style.left = `${posX}%`;
+          particle.style.top = `${posY}%`;
+          particle.style.animationDelay = `${delay}s`;
+          particle.style.animationDuration = `${duration}s`;
+
+          particlesContainer.appendChild(particle);
         }
       }
 
-      /** ---------------------------
-   * Fetch Employee Data
-   ---------------------------- */
-      async function fetchEmployeeData() {
-        try {
-          const response = await fetch("fetch_info.php");
-          if (!response.ok) throw new Error("Network error");
-
-          const data = await response.json();
-          if (!data.success) {
-            return showToast(
-              "Failed to load data: " + (data.message || "Error"),
-              "error"
-            );
-          }
-
-          // Fill personal info
-          const u = data.user;
-          document.getElementById("fullName").value = u.name || "";
-          document.getElementById("email").value = u.email || "";
-          document.getElementById("phone").value = u.phone || "";
-          document.getElementById("dob").value = u.date_of_birth || "";
-          document.getElementById("gender").value = u.gender || "male";
-
-          // Fill bank info
-          document.getElementById("accountName").value =
-            u.account_holder_name || "";
-          document.getElementById("accountNumber").value =
-            u.account_number || "";
-          document.getElementById("ifsc").value = u.ifsc_code || "";
-          document.getElementById("bankName").value = u.bank_name || "";
-          document.getElementById("branch").value = u.branch_name || "";
-
-          updateProfileInitials(u.name);
-        } catch (err) {
-          showToast("Error fetching data: " + err.message, "error");
-        }
-      }
-
-      /** ---------------------------
-   * Update Profile
-   ---------------------------- */
-      async function updateProfile() {
-        const btn = document.getElementById("saveProfile");
-        const spinner = document.getElementById("profileSpinner");
-
-        btn.disabled = true;
-        spinner.style.display = "inline-block";
-
-        const formData = {
-          name: document.getElementById("fullName").value.trim(),
-          email: document.getElementById("email").value.trim(),
-          password: document.getElementById("password").value.trim(),
-          phone: document.getElementById("phone").value.trim(),
-          date_of_birth: document.getElementById("dob").value,
-          gender: document.getElementById("gender").value,
-        };
-
-        try {
-          const res = await fetch("update_profile.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
-          });
-          const result = await res.json();
-
-          if (result.success) {
-            showToast("Profile updated successfully!");
-            updateProfileInitials(formData.name);
-          } else {
-            showToast(result.message || "Failed to update profile", "error");
-          }
-        } catch (err) {
-          showToast("Error updating profile: " + err.message, "error");
-        } finally {
-          btn.disabled = false;
-          spinner.style.display = "none";
-        }
-      }
-
-      /** ---------------------------
-   * Update Bank Details
-   ---------------------------- */
-      async function updateBankDetails() {
-        const btn = document.getElementById("saveBank");
-        const spinner = document.getElementById("bankSpinner");
-
-        btn.disabled = true;
-        spinner.style.display = "inline-block";
-
-        const formData = {
-          account_holder_name: document
-            .getElementById("accountName")
-            .value.trim(),
-          account_number: document.getElementById("accountNumber").value.trim(),
-          ifsc_code: document.getElementById("ifsc").value.trim(),
-          bank_name: document.getElementById("bankName").value.trim(),
-          branch_name: document.getElementById("branch").value.trim(),
-        };
-
-        try {
-          const res = await fetch("update_bank.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
-          });
-          const result = await res.json();
-
-          if (result.success) {
-            showToast("Bank details updated successfully!");
-          } else {
-            showToast(
-              result.message || "Failed to update bank details",
-              "error"
-            );
-          }
-        } catch (err) {
-          showToast("Error updating bank details: " + err.message, "error");
-        } finally {
-          btn.disabled = false;
-          spinner.style.display = "none";
-        }
-      }
-
-      /** ---------------------------
-   * Helpers
-   ---------------------------- */
-      function updateProfileInitials(fullName) {
-        if (!fullName) return;
-        const names = fullName.trim().split(" ");
-        const initials =
-          names[0][0] + (names.length > 1 ? names[names.length - 1][0] : "");
-        document.getElementById("profileInitials").textContent = initials;
-        document.getElementById("profilePic").textContent = initials;
-      }
-
+      // Toast notification
       function showToast(message, type = "success") {
-        document.querySelectorAll(".toast").forEach((t) => t.remove());
+        // Remove existing toasts
+        const existingToasts = document.querySelectorAll(".toast");
+        existingToasts.forEach((toast) => toast.remove());
+
         const toast = document.createElement("div");
         toast.className = `toast ${type === "error" ? "toast-error" : ""}`;
-        toast.innerHTML =
-          (type === "success"
+
+        const icon =
+          type === "success"
             ? '<i class="fas fa-check-circle"></i>'
-            : '<i class="fas fa-exclamation-circle"></i>') +
-          `<span>${message}</span>`;
+            : '<i class="fas fa-exclamation-circle"></i>';
+
+        toast.innerHTML = `${icon}<span>${message}</span>`;
         document.body.appendChild(toast);
-        setTimeout(() => toast.remove(), 3000);
+
+        setTimeout(() => {
+          if (toast.parentNode) {
+            toast.remove();
+          }
+        }, 3000);
       }
 
-      /** ---------------------------
-   * DOM Ready
-   ---------------------------- */
+    // Load leave applications from server
+async function loadLeaveApplications() {
+  try {
+    const response = await fetch("leave_list.php", {
+      credentials: "include",
+    });
+
+    if (!response.ok) throw new Error("Network error");
+    
+    const data = await response.json();
+    
+    if (data.success && data.leaves) {
+      renderLeaveApplications(data.leaves);
+    } else {
+      showToast("Failed to load leave applications", "error");
+      document.getElementById("leaveList").innerHTML = `
+        <div class="no-leaves">
+          <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+          <p>No leave applications found</p>
+        </div>
+      `;
+    }
+  } catch (error) {
+    console.error("Error loading leave applications:", error);
+    showToast("Error loading leave applications", "error");
+    document.getElementById("leaveList").innerHTML = `
+      <div class="no-leaves">
+        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+        <p>Error loading leave applications</p>
+      </div>
+    `;
+  }
+}
+      // Render leave applications
+function renderLeaveApplications(leaves) {
+  const leaveList = document.getElementById("leaveList");
+  
+  if (!leaves || leaves.length === 0) {
+    leaveList.innerHTML = `
+      <div class="no-leaves">
+        <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+        <p>No leave applications found</p>
+      </div>
+    `;
+    return;
+  }
+
+  leaveList.innerHTML = leaves.map(leave => {
+    // Format dates
+    const startDate = new Date(leave.start_date);
+    const endDate = new Date(leave.end_date);
+    const timeDiff = endDate - startDate;
+    const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)) + 1;
+
+    const formattedStartDate = startDate.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+    const formattedEndDate = endDate.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+    // Determine status class
+    let statusClass = "status-pending";
+    let statusIcon = "fa-clock";
+    if (leave.status === "approved") {
+      statusClass = "status-approved";
+      statusIcon = "fa-check-circle";
+    } else if (leave.status === "rejected") {
+      statusClass = "status-rejected";
+      statusIcon = "fa-times-circle";
+    }
+
+    return `
+      <div class="leave-item" data-leave-id="${leave.id}">
+        <div class="leave-header">
+          <div class="employee-info">
+            <div class="employee-avatar">${leave.initials || 'UU'}</div>
+            <div class="employee-details">
+              <div class="employee-name">${leave.employee_name || 'Unknown Employee'}</div>
+              <div class="employee-email">${leave.employee_email || 'No email provided'}</div>
+            </div>
+          </div>
+          <div class="leave-status ${statusClass}">
+            <i class="fas ${statusIcon}"></i>
+            ${leave.status.charAt(0).toUpperCase() + leave.status.slice(1)}
+          </div>
+        </div>
+
+        <div class="leave-details">
+          <div class="leave-title">${leave.title} (${leave.leave_type})</div>
+          <div class="leave-dates">
+            <i class="far fa-calendar-alt"></i>
+            ${formattedStartDate} - ${formattedEndDate} (${daysDiff} day${daysDiff !== 1 ? "s" : ""})
+          </div>
+          <div class="leave-reason">
+            ${leave.reason}
+          </div>
+
+          ${leave.status === "pending" ? `
+          <div class="leave-actions">
+            <button class="approve-btn" data-leave-id="${leave.id}">
+              <i class="fas fa-check"></i>
+              Approve
+            </button>
+            <button class="reject-btn" data-leave-id="${leave.id}">
+              <i class="fas fa-times"></i>
+              Reject
+            </button>
+          </div>
+          ` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Add event listeners to action buttons
+  document.querySelectorAll(".approve-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const leaveId = e.target.closest(".approve-btn").dataset.leaveId;
+      updateLeaveStatus(leaveId, "approved");
+    });
+  });
+
+  document.querySelectorAll(".reject-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const leaveId = e.target.closest(".reject-btn").dataset.leaveId;
+      updateLeaveStatus(leaveId, "rejected");
+    });
+  });
+}
+  // Add event listeners to action buttons
+  document.querySelectorAll(".approve-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const leaveId = e.target.closest(".approve-btn").dataset.leaveId;
+      updateLeaveStatus(leaveId, "approved");
+    });
+  });
+
+  document.querySelectorAll(".reject-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const leaveId = e.target.closest(".reject-btn").dataset.leaveId;
+      updateLeaveStatus(leaveId, "rejected");
+    });
+  });
+
+
+      // Update leave status
+      async function updateLeaveStatus(leaveId, status) {
+        try {
+          const response = await fetch("update_leave_status.php", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ leaveId, status }),
+            credentials: "include",
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+            showToast(`Leave ${status} successfully`);
+            // Reload the leave applications
+            loadLeaveApplications();
+          } else {
+            showToast(result.message || `Error ${status}ing leave`, "error");
+          }
+        } catch (error) {
+          console.error("Error updating leave status:", error);
+          showToast("Network error updating leave status", "error");
+        }
+      }
+
       document.addEventListener("DOMContentLoaded", () => {
         createParticles();
-        fetchEmployeeData();
+        loadLeaveApplications();
 
-        // Navbar scroll effect
-        const navbar = document.getElementById("navbar");
-        window.addEventListener("scroll", () => {
-          navbar.classList.toggle("scrolled", window.scrollY > 10);
-        });
-
-        // Dropdown
         const userProfile = document.getElementById("userProfile");
         const userDropdown = document.getElementById("userDropdown");
 
+        // Toggle dropdown on avatar click
         userProfile.addEventListener("click", (e) => {
           e.stopPropagation();
           userDropdown.classList.toggle("active");
         });
+
+        // Close dropdown when clicking outside
         document.addEventListener("click", (e) => {
-          if (!userProfile.contains(e.target))
+          if (!userProfile.contains(e.target)) {
             userDropdown.classList.remove("active");
-        });
-        document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape") userDropdown.classList.remove("active");
+          }
         });
 
-        // Form events
-        document
-          .getElementById("saveProfile")
-          .addEventListener("click", updateProfile);
-        document
-          .getElementById("saveBank")
-          .addEventListener("click", updateBankDetails);
+        // Close dropdown when pressing Escape key
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            userDropdown.classList.remove("active");
+          }
+        });
+
+        // Initialize navbar scroll effect
+        const navbar = document.getElementById("navbar");
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 10) {
+            navbar.classList.add("scrolled");
+          } else {
+            navbar.classList.remove("scrolled");
+          }
+        });
+
+        const navButtons = document.querySelectorAll(".nav-button");
+
+        // Nav button active state
+        navButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            navButtons.forEach((btn) => btn.classList.remove("active"));
+            button.classList.add("active");
+
+            // In a real app, this would navigate between pages
+            if (button.textContent === "List") {
+              window.location.href = "ownerlanding.html";
+            }
+          });
+        });
+
+        // Adjust content container height
+        function adjustHeight() {
+          const navbarHeight = document.querySelector(".navbar").offsetHeight;
+          const contentContainer = document.querySelector(".content-container");
+          contentContainer.style.maxHeight = `calc(100vh - ${navbarHeight}px)`;
+        }
+
+        window.addEventListener("resize", adjustHeight);
+        adjustHeight();
       });
     </script>
   </body>

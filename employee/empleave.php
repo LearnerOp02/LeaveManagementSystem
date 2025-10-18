@@ -964,10 +964,10 @@
       </a>
 
       <div class="nav-links">
-        <a href="emplanding.html"
+        <a href="emplanding.php"
           ><button class="nav-button">Profile</button></a
         >
-        <a href="empleave.html"
+        <a href="empleave.php"
           ><button class="nav-button active">Leave</button></a
         >
       </div>

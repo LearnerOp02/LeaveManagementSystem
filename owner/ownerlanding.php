@@ -941,10 +941,10 @@
       </a>
 
       <div class="nav-links">
-        <a href="ownerlanding.html"
+        <a href="ownerlanding.php"
           ><button class="nav-button active">List</button></a
         >
-        <a href="ownerleave.html"><button class="nav-button">Leave</button></a>
+        <a href="ownerleave.php"><button class="nav-button">Leave</button></a>
       </div>
 
       <div class="user-profile" id="userProfile">

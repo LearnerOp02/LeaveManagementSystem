@@ -7,7 +7,7 @@ require_once("config.php");
 
 // Check if form was submitted via POST method
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    
+
     // Get and sanitize user input
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
@@ -27,10 +27,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Check if user exists
     if ($result->num_rows === 1) {
         $user = $result->fetch_assoc();  // Get user data as associative array
-        
+
         // Verify password against hashed password in database
         if (password_verify($password, $user['password'])) {
-            
+
             // Login successful - store user data in session
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['name'] = $user['name'];
@@ -39,12 +39,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             // Redirect based on user role
             if ($user['role'] === 'owner') {
-                header("Location: owner/ownerlanding.html");
+                header("Location: owner/ownerlanding.php");
             } else {
-                header("Location: employee/emplanding.html");
+                header("Location: employee/emplanding.php");
             }
             exit();
-            
+
         } else {
             // Wrong password
             header("Location: index.php?error=Invalid password");
