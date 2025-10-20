@@ -3,7 +3,7 @@
 session_start();
 
 // Include database configuration
-require_once("config.php");
+require_once __DIR__ . '/../config/config.php';
 
 // Check if form was submitted via POST method
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -39,9 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             // Redirect based on user role
             if ($user['role'] === 'owner') {
-                header("Location: owner/ownerlanding.php");
+                header("Location: owner/dashboard.php");
             } else {
-                header("Location: employee/emplanding.php");
+                header("Location: employee/dashboard.php");
             }
             exit();
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../config.php");
+include("../../config/config.php");
 header('Content-Type: application/json');
 
 // Check if user is logged in

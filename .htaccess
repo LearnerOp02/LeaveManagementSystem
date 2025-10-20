@@ -1,0 +1,6 @@
+# Prevent access to sensitive folders
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^(config|sql|docs|includes) - [F,L,NC]
+</IfModule>

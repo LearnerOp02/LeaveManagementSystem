@@ -1,7 +1,7 @@
 <?php
 // Start session to check if user is logged in
 session_start();
-include("../config.php");
+include("../../config/config.php");
 
 // Set response type to JSON
 header('Content-Type: application/json');

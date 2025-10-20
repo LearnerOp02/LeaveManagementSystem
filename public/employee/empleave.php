@@ -964,7 +964,7 @@
       </a>
 
       <div class="nav-links">
-        <a href="emplanding.php"
+        <a href="dashboard.php"
           ><button class="nav-button">Profile</button></a
         >
         <a href="empleave.php"
