@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2025 at 08:00 AM
+-- Generation Time: Nov 03, 2025 at 11:26 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -36,16 +36,17 @@ CREATE TABLE `leave_applications` (
   `to_date` date DEFAULT NULL,
   `reason` text DEFAULT NULL,
   `status` enum('pending','approved','rejected') DEFAULT 'pending',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `total_days` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `leave_applications`
 --
 
-INSERT INTO `leave_applications` (`id`, `user_id`, `title`, `leave_type`, `from_date`, `to_date`, `reason`, `status`, `created_at`) VALUES
-(1, 1, 'Demo1', 'sick', '2025-09-19', '2025-09-20', 'Having fever ', 'approved', '2025-09-19 05:08:18'),
-(2, 3, 'Leave Due to Health Issue', 'sick', '2025-09-28', '2025-09-29', 'I was experiencing slight pain in my heart and need rest/medical consultation. Hence, I am unable to attend on the mentioned date.', 'approved', '2025-09-28 13:39:18');
+INSERT INTO `leave_applications` (`id`, `user_id`, `title`, `leave_type`, `from_date`, `to_date`, `reason`, `status`, `created_at`, `total_days`) VALUES
+(1, 1, 'Demo1', 'sick', '2025-09-19', '2025-09-20', 'Having fever ', 'approved', '2025-09-19 05:08:18', 2),
+(2, 3, 'Leave Due to Health Issue', 'sick', '2025-09-28', '2025-09-29', 'I was experiencing slight pain in my heart and need rest/medical consultation. Hence, I am unable to attend on the mentioned date.', 'approved', '2025-09-28 13:39:18', 2);
 
 -- --------------------------------------------------------
 
