@@ -923,7 +923,7 @@
       </a>
 
       <div class="nav-links">
-        <a href="ownerlanding.php"><button class="nav-button">List</button></a>
+        <a href="dashboard.php"><button class="nav-button">List</button></a>
         <a href="ownerleave.php"
           ><button class="nav-button active">Leave</button></a
         >

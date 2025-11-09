@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2025 at 11:26 AM
+-- Generation Time: Nov 09, 2025 at 05:11 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -46,7 +46,8 @@ CREATE TABLE `leave_applications` (
 
 INSERT INTO `leave_applications` (`id`, `user_id`, `title`, `leave_type`, `from_date`, `to_date`, `reason`, `status`, `created_at`, `total_days`) VALUES
 (1, 1, 'Demo1', 'sick', '2025-09-19', '2025-09-20', 'Having fever ', 'approved', '2025-09-19 05:08:18', 2),
-(2, 3, 'Leave Due to Health Issue', 'sick', '2025-09-28', '2025-09-29', 'I was experiencing slight pain in my heart and need rest/medical consultation. Hence, I am unable to attend on the mentioned date.', 'approved', '2025-09-28 13:39:18', 2);
+(2, 3, 'Leave Due to Health Issue', 'sick', '2025-09-28', '2025-09-29', 'I was experiencing slight pain in my heart and need rest/medical consultation. Hence, I am unable to attend on the mentioned date.', 'approved', '2025-09-28 13:39:18', 2),
+(3, 9, 'Annual Vacation - Demo Leave', 'vacation', '2025-11-07', '2025-11-28', 'dsdswqsw', 'approved', '2025-11-07 17:09:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -79,7 +80,8 @@ INSERT INTO `user_db` (`id`, `name`, `email`, `password`, `role`, `phone`, `date
 (1, 'Demo User', 'demo.user@company.com', '$2b$12$MoubV.HxFnq67M0vy9prHefIl42MjDTQiYhLtQaAwt4X1PPf0GY9y', 'employee', '9998887777', '1995-01-15', 'male', 'Demo User', '112233445566', 'SBIN0001234', 'State Bank of India', 'Nerul Branch', '2025-09-19 05:05:13'),
 (2, 'Owner Admin', 'owner.admin@example.com', '$2b$12$npZynNs6IN1pxoMtDhM8Qu39cZsvtD0AhYhednBgYjShri6djTGzK', 'owner', '9887766554', '1980-12-05', 'male', 'Owner Admin', '556677889900', 'HDFC0004321', 'HDFC Bank', 'Navi Mumbai Branch', '2025-09-19 05:10:34'),
 (3, 'Demo User 2', 'demo.user2@company.com', '$2y$10$u5MiXiRyJH2XuablE1kEs.fAnrKF4NOJmQ5x26r6/InvSwhqnzLEa', 'employee', '1234567890', '2002-06-03', 'male', 'Demo User2', '1234567890', 'NBIN123456', 'SBI', 'Mulund', '2025-09-19 05:55:18'),
-(4, 'Amol Patil', 'amol.patil@company.com', '$2y$10$1GKgixXWNERsUI9Tv55tpekiY4Mo/rTFd1tCYda5w3m7fWdoJbaPm', 'employee', '1234567890', '2002-06-04', 'male', 'Amol Patil', '1234567890', 'NBIN123456', 'SBI', 'Mulund', '2025-10-01 13:56:07');
+(4, 'Amol Patil', 'amol.patil@company.com', '$2y$10$1GKgixXWNERsUI9Tv55tpekiY4Mo/rTFd1tCYda5w3m7fWdoJbaPm', 'employee', '1234567890', '2002-06-04', 'male', 'Amol Patil', '1234567890', 'NBIN123456', 'SBI', 'Mulund', '2025-10-01 13:56:07'),
+(9, 'Sakshi Patil', 'sakshi.patil@company.com', '$2y$10$lICHxlkYuWEobDvuPhP/JuzbN0JQ5/uA/Lxw1KnQFpkoqFN/boks6', 'employee', '8855393477', '2025-11-14', 'female', 'Sakshi Patil', '1234567890', '12345678', 'ICIC', 'Parel', '2025-11-07 17:08:31');
 
 --
 -- Indexes for dumped tables
@@ -107,13 +109,13 @@ ALTER TABLE `user_db`
 -- AUTO_INCREMENT for table `leave_applications`
 --
 ALTER TABLE `leave_applications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_db`
 --
 ALTER TABLE `user_db`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
